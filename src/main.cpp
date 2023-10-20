@@ -8,5 +8,5 @@ int	main(int argc, char **argv)
 		std::cout << "Wrong number of arguments" << std::endl;
 		return (0);
 	}
-	parse("TEST");
+	parse("TEST LOL OK");
 }

@@ -1,4 +1,4 @@
-SRCS	= src/main.cpp src/cmd/parser.cpp
+SRCS	= src/main.cpp src/cmd/parser.cpp src/utils/split.cpp
 
 OBJS 	= $(SRCS:.cpp=.o)
 
