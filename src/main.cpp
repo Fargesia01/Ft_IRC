@@ -1,4 +1,5 @@
 #include <iostream>
+#include "cmd/parser.hpp"
 
 int	main(int argc, char **argv)
 {
@@ -7,5 +8,5 @@ int	main(int argc, char **argv)
 		std::cout << "Wrong number of arguments" << std::endl;
 		return (0);
 	}
-	std::cout << "Working" << std::endl;
+	parse("TEST");
 }

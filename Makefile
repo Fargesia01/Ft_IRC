@@ -1,26 +1,26 @@
-SRCS = src/main.cpp 
+SRCS	= src/main.cpp src/cmd/parser.cpp
 
-OBJS = $(SRCS:.cpp=-o)
+OBJS 	= $(SRCS:.cpp=.o)
 
-NAME = ft_irc
+NAME	= ft_irc
 
-CC = c++
+CC	= c++
 
-RM = rm -f
+RM	= ft_irc
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	 $(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-all: $(NAME)
+all:	$(NAME)
 
 clean:
 	$(RM) $(OBJS)
 
-fclean: clean
+fclean:	clean
 	$(RM) $(NAME)
 
-re: clean all
+re:		fclean all
 
 .PHONY: all clean fclean re
