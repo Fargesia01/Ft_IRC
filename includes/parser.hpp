@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../utils/utils.hpp"
+#include "utils.hpp"
 
 typedef struct s_message
 {

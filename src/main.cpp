@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cmd/parser.hpp"
+#include "../includes/parser.hpp"
 
 int	main(int argc, char **argv)
 {
