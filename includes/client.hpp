@@ -11,8 +11,8 @@ class Client
 		Client();
 		virtual ~Client();
 		
-		std::string	getUsername(); const
-		std::string	getNickname(); const
+		std::string	getUsername() const;
+		std::string	getNickname() const;
 		void		setUsername(std::string new_name);
 		void		setNickname(std::string new_name);
 
