@@ -16,7 +16,9 @@ int	main(int argc, char **argv)
 		std::cout << "Wrong number of arguments" << std::endl;
 		return (0);
 	}
-	
+
+	/* Basic listening Server	
+
 	struct addrinfo		hints, *res;
 	int			sockfd, new_fd;
 	socklen_t		addr_size;
@@ -61,4 +63,5 @@ int	main(int argc, char **argv)
 	// Closes all sockets
 	close(sockfd);
 	close(new_fd);
+	*/
 }

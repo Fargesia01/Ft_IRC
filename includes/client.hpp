@@ -8,11 +8,15 @@ class Client
 {
 	public :
 
+		// Constructors & Destructor
 		Client();
 		virtual ~Client();
 		
+		// Getters
 		std::string	getUsername() const;
 		std::string	getNickname() const;
+
+		// Setters
 		void		setUsername(std::string new_name);
 		void		setNickname(std::string new_name);
 

@@ -7,7 +7,7 @@ SRCS = main.cpp \
 		utils/split.cpp
 
 SRCS_DIR = src
-SUB_DIR = client cmd utils
+SUB_DIR = client cmd utils server
 
 OBJS = $(SRCS:.cpp=.o)
 OBJS_DIR = obj
