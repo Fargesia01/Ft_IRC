@@ -1,67 +1,109 @@
-#include <iostream>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netdb.h>
-#include <cstring>
-#include <cstdlib>
-#include <unistd.h>
-#include "../includes/parser.hpp"
+#include "../includes/server.hpp"
 
-#define BACKLOG 10
+bool server_shutdown = false;
 
-int	main(int argc, char **argv)
+static void	signal_handler(int signal)
 {
-	if (argc != 3)
+	(void)signal;
+	server_shutdown = true;
+}
+
+
+Server::Server(std::string port, std::string password, struct tm *timeinfo)
+: servinfo(NULL), server_socket_fd(0) , port(port), password(password)
+{
+	memset(&hints, 0, sizeof(hints)); // verifier si la struct est vide
+	this->setDatetime(timeinfo);
+}
+
+Server::~Server() {};
+
+void							Server::setDatetime(struct tm *timeinfo)
+{
+	char buffer[80];
+
+	strftime(buffer,sizeof(buffer),"%d-%m-%Y %H:%M:%S",timeinfo);
+  	std::string str(buffer);
+
+	datetime = str;
+}
+
+void Server::setHints()
+{
+	hints.ai_family = AF_INET;		  // Ipv4
+	hints.ai_socktype = SOCK_STREAM; // TCP stream sockets
+	hints.ai_flags = AI_PASSIVE;	  // mon ip
+}
+
+int Server::fillServinfo(char *port)
+{
+	if (getaddrinfo(NULL, port, &hints, &servinfo) < 0)
 	{
-		std::cout << "Wrong number of arguments" << std::endl;
-		return (0);
+		std::cerr << "[ERROR] addrinfo problem" << std::endl;
+		return (-1);
 	}
+	return (0);
+}
 
-	/* Basic listening Server	
-
-	struct addrinfo		hints, *res;
-	int			sockfd, new_fd;
-	socklen_t		addr_size;
-	struct sockaddr_storage	their_addr;
-
-	// Fill in setup parameters for getaddrinfo()
-	memset(&hints, 0, sizeof(hints));
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_flags = AI_PASSIVE;
-
-	// Prepares the struct for the socket
-	getaddrinfo(NULL, "6667", &hints, &res);
-
-	// Creates the socket
-	sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
-
-	// Binds the socket with the struct
-	bind(sockfd, res->ai_addr, res->ai_addrlen);
-
-	// Prompts the socket to listen for incoming connections
-	listen(sockfd, BACKLOG);
-
-	// Creates new socket for the new connection
-	addr_size = sizeof(their_addr);
-	new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &addr_size);
-
-	// Loop to print every new message on the new socket
-	while (1)
+int Server::launchServer()
+{
+	server_socket_fd = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol);
+	if (server_socket_fd == -1)
 	{
-		char buffer[1024];
-		ssize_t bytes_received = recv(new_fd, buffer, sizeof(buffer), 0);
+		std::cerr << "[ERROR] socket problem" << std::endl;
+		return (-1);
+	}
+	int yes = 1;
+	if (setsockopt(server_socket_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes)) == -1)
+	{
+		std::cerr << "[ERROR] Address already in use" << std::endl;
+		return (-1);
+	}
+	if (bind(server_socket_fd, servinfo->ai_addr, servinfo->ai_addrlen) == -1)
+	{
+		std::cerr << "[ERROR] bind failed" << std::endl;
+		return (1);
+	}
+	if (listen(server_socket_fd, BACKLOG) == -1)
+	{
+		std::cerr << "[ERROR] listen failed" << std::endl;
+		return (-1);
+	}
+	freeaddrinfo(servinfo);
+	return (0);
+}
 
-		if (bytes_received > 1)
+int main(int argc, char **argv)
+{
+	if (argc == 3)
+	{
+		time_t rawtime;
+		struct tm * timeinfo;
+
+		time (&rawtime);
+		timeinfo = localtime(&rawtime);
+
+		signal(SIGINT, signal_handler);
+
+        Server  server(argv[1], argv[2], timeinfo);
+        server.setHints();
+		if (server.fillServinfo(argv[1]) == -1)
+			return (-1);
+		server.launchServer(); //mise en place du serveur
+        std::cout << "server on" << std::endl;
+		try
 		{
-			std::cout << buffer << std::endl;
+			server.serverLoop(); //lancement de la boucle pour le serveur
 		}
-		else
-			break ;
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n' << std::endl;
+		}
+		return (SUCCESS);
 	}
-
-	// Closes all sockets
-	close(sockfd);
-	close(new_fd);
-	*/
+    else
+	{
+        std::cout << "need 2 arguments: \"./ircserv port password\"" << std::endl;
+		return (-1);
+	}
 }

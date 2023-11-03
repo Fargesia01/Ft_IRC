@@ -1,44 +1,22 @@
-NAME = ft_irc
+SRCS	=	src/main.cpp src/rpl.cpp src/server.cpp src/client.cpp
 
-SRCS = main.cpp \
-		client/client.cpp \
-		cmd/NICK.cpp \
-		cmd/parser.cpp \
-		utils/split.cpp
+OBJS	=	${SRCS:.cpp=.o}
 
-SRCS_DIR = src
-SUB_DIR = client cmd utils server
+FLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-OBJS = $(SRCS:.cpp=.o)
-OBJS_DIR = obj
+NAME	=	irc
 
-DIRS = obj
+${NAME}:	${OBJS}
+				c++ ${FLAGS} ${OBJS} -o ${NAME}
 
-_SRCS =  $(addprefix $(SRCS_DIR)/, $(SRCS))
-_OBJS = $(addprefix $(OBJS_DIR)/, $(OBJS))
-
-HEADERS = includes
-
-CC = g++
-FLAGS = -I $(HEADERS) -Wall -Wextra  -std=c++98
-
-all: $(NAME)
-
-$(NAME): $(_OBJS)
-	$(CC) $(_OBJS) $(FLAGS) -o $(NAME)
-
-$(_OBJS): $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.cpp $(DIRS)
-	$(CC) -c $(FLAGS) $< -o $@
-
-$(DIRS):
-	$(foreach dir, $(SUB_DIR), mkdir -p $(DIRS)/$(dir);)
+all:		${NAME}
 
 clean:
-	rm -rf $(OBJS_DIR)
+				rm -rf ${OBJS}
 
-fclean:
-	rm -rf $(OBJS_DIR) $(NAME)
+fclean:		clean
+				rm -rf ${OBJS} ${NAME}
 
-re: fclean all
+re:		fclean all
 
-.PHONY: all re clean fclean
+.PHONY:		all clean fclean re
