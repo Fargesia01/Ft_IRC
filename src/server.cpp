@@ -36,7 +36,7 @@ int	Server::createClient(std::vector<pollfd>& poll_fds, std::vector<pollfd>& new
 	return (SUCCESS);
 }
 
-int	Server::handlePolloutEvent(std::vector<pollfd>& poll_fds, std::vector<pollfd>::iterator &it, const int current_fd)
+int	Server::handlePollout(std::vector<pollfd>& poll_fds, std::vector<pollfd>::iterator &it, const int current_fd)
 {
 	Client *client = getClient(this, current_fd);
 	if (!client)
@@ -88,7 +88,7 @@ int Server::serverLoop()
             }
             else if (it->revents & POLLOUT) // si l event est un POLLOUT (données pretes à send() on envoie au client)
             {
-                if (handlePolloutEvent(poll_fds, it, it->fd) == BREAK)
+                if (handlePollout(poll_fds, it, it->fd) == BREAK)
                     break ;
             }
             it++;
