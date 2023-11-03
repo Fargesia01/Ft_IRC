@@ -51,17 +51,17 @@ public:
 	void							setDatetime(struct tm *timeinfo);
 	std::string 						getDatetime() const;
 	void							setHints();
-	int								fillServinfo(char *port);
-	int								launchServer();
-	int								serverLoop();
-	std::map<const int, Client>&					getClients();
-	int								handlePollout(std::vector<pollfd>& poll_fds, std::vector<pollfd>::iterator &it, const int current_fd);
-	void 								addClient(int client_socket, std::vector<pollfd> &poll_fds);
-	int								createClient(std::vector<pollfd>& poll_fds, std::vector<pollfd>& new_pollfds);
-	int 								manageClient(std::vector<pollfd>& poll_fds, std::vector<pollfd>::iterator &it);
-	void 								checkReg(int const client_fd, std::string message);
-	void								deleteClient(std::vector<pollfd> &poll_fds, std::vector<pollfd>::iterator &it, int current_fd);
-    ~Server();
+	int							fillServinfo(char *port);
+	int							launchServer();
+	int							serverLoop();
+	std::map<const int, Client>&				getClients();
+	int							handlePollout(std::vector<pollfd>& poll_fds, std::vector<pollfd>::iterator &it, const int current_fd);
+	void 							addClient(int client_socket, std::vector<pollfd> &poll_fds);
+	int							createClient(std::vector<pollfd>& poll_fds, std::vector<pollfd>& new_pollfds);
+	int 							manageClient(std::vector<pollfd>& poll_fds, std::vector<pollfd>::iterator &it);
+	void 							checkReg(int const client_fd, std::string message);
+	void							deleteClient(std::vector<pollfd> &poll_fds, std::vector<pollfd>::iterator &it, int current_fd);
+    	~Server();
 };
 
 
