@@ -1,13 +1,11 @@
 NAME = ft_irc
 
 SRCS = main.cpp \
-		client/client.cpp \
-		cmd/NICK.cpp \
-		cmd/parser.cpp \
-		utils/split.cpp
+		server/init_server.cpp \
+		server/server.cpp \
 
 SRCS_DIR = src
-SUB_DIR = client cmd utils server
+SUB_DIR = client cmd server utils
 
 OBJS = $(SRCS:.cpp=.o)
 OBJS_DIR = obj
@@ -37,6 +35,7 @@ clean:
 	rm -rf $(OBJS_DIR)
 
 fclean:
+	clear
 	rm -rf $(OBJS_DIR) $(NAME)
 
 re: fclean all
