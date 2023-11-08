@@ -17,8 +17,29 @@ int	Server::serverLoop()
 {
 	while (server_shutdown == false)
 	{
-		// Need to parse the polls
-		std::cout << "lol" << std::endl;
+		int status = poll(polls.data(), polls.size(), -1);
+		if (status == -1)
+		{
+			std::cout << "Error in poll() call" << std::endl;
+			return (-1);
+		}
+		for (int i = 0; i < (int)polls.size(); i++)
+		{
+			if (polls[i].revents & POLLIN)
+			{
+				if (i == 0)
+					newClient();
+				else
+				{
+					manageClient(clients[i]);
+					// Handle client 
+				}
+			}
+			else if (polls[i].revents & POLLOUT)
+			{
+				//std::cout << "Handle Pollout" << std::endl;
+			}
+		}
 	}
 	return (SUCCESS);
 }

@@ -13,6 +13,7 @@
 
 #define SUCCESS 0
 #define BACKLOG 10
+#define BUF_SIZE_MSG 4096
 
 class Server;
 
@@ -35,6 +36,12 @@ class Server
 		int		fillServinfo();
 		int		launchServer();
 
+		// Client Management
+
+		int		newClient();
+		void		manageClient(Client *client);
+		void		deleteClient(Client *client);
+
 		// Server management
 
 		int		serverLoop();
@@ -53,6 +60,9 @@ class Server
 		std::string			password;
 		std::string			datetime;
 		std::map<std::string, cmdPtr>	cmd_map;
+		std::map<int, Client*>		clients;
 };
+
+int	acceptSocket(int socket);
 
 #endif

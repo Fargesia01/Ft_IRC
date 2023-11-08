@@ -4,8 +4,19 @@
 class Client
 {
 	public :
+		
+		// Constructor and Destructor
+
+		Client(int socket);
+		~Client();
+
+		// Getters and Setters
+
+		int	getSocket() const;
 
 	private :
+
+		int	socket;
 
 };
 

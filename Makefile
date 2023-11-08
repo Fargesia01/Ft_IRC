@@ -1,8 +1,11 @@
 NAME = ft_irc
 
 SRCS = main.cpp \
+		server/client_management.cpp \
 		server/init_server.cpp \
+		server/server_utils.cpp \
 		server/server.cpp \
+		client/client.cpp
 
 SRCS_DIR = src
 SUB_DIR = client cmd server utils
