@@ -30,10 +30,7 @@ int	Server::serverLoop()
 				if (i == 0)
 					newClient();
 				else
-				{
-					manageClient(clients[i]);
-					// Handle client 
-				}
+					manageClient(clients[polls[i].fd]);
 			}
 			else if (polls[i].revents & POLLOUT)
 			{
