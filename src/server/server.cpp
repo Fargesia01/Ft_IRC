@@ -30,15 +30,60 @@ int	Server::serverLoop()
 				if (i == 0)
 					newClient();
 				else
-					manageClient(clients[polls[i].fd]);
+					handlePollin(clients[polls[i].fd]);
 			}
 			else if (polls[i].revents & POLLOUT)
-			{
-				//std::cout << "Handle Pollout" << std::endl;
-			}
+				handlePollout(clients[polls[i].fd]);
 		}
 	}
 	return (SUCCESS);
+}
+
+void	Server::handlePollin(Client *client)
+{
+	char	message[BUF_SIZE_MSG];
+	int	readCount;
+
+	memset(message, 0, sizeof(message));
+	readCount = recv(client->getSocket(), message, BUF_SIZE_MSG, 0);
+	if (readCount <= -1)
+	{
+		std::cerr << "[SERVER]: recv() FAILED" << std::endl;
+		deleteClient(client);
+		return ;
+	}
+	else if (readCount == 0)
+	{
+		std::cout << "[SERVER]: A CLIENT JUST DISCONNECTED\n";
+		deleteClient(client);
+		return ;
+	}
+	else
+	{
+	   std::cout << "[CLIENT]: MESSAGE RECEIVED FROM CLIENT : " << client->getSocket() << std::endl << message << std::endl;
+	   client->setReadBuffer(message);
+	}
+}
+
+void	Server::handlePollout(Client *client)
+{
+	sendToClient(client);
+}
+
+// Getters
+
+std::string	Server::getPassword() const { return (password); }
+
+Client* Server::getClient(std::string nickname)
+{
+	if (clients.empty())
+		return (NULL);
+	for (int i = 0; i < (int)clients.size(); i++)
+	{
+		if (clients[i]->getNickname() == nickname)
+			return (clients[i]);
+	}
+	return (NULL);
 }
 
 // Setters

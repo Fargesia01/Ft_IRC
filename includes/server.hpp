@@ -9,7 +9,10 @@
 #include <netdb.h>
 #include <vector>
 #include <poll.h>
+#include <sstream>
 #include "client.hpp"
+#include "defines.h"
+#include "utils.hpp"
 
 #define SUCCESS 0
 #define BACKLOG 10
@@ -39,17 +42,31 @@ class Server
 		// Client Management
 
 		int		newClient();
-		void		manageClient(Client *client);
 		void		deleteClient(Client *client);
 
 		// Server management
 
 		int		serverLoop();
+		void		handlePollin(Client *client);
+		void		handlePollout(Client *client);
+
+		// Commands
+
+		void		nick(Client *client, std::vector<std::string> args);
+		void		pass(Client *client, std::vector<std::string> args);
+		void		user(Client *client, std::vector<std::string> args);
+		void		ping(Client *client, std::vector<std::string> args);
+
+		// Parsing
+
+		void		parse(Client *client, std::string text);
+		void		parseSrc(Client *client, std::string text);
 
 		// Getters and Setters
 		
-		void		getPassword() const;
+		std::string	getPassword() const;
 		void		setDatetime(struct tm *timeinfo);
+		Client*		getClient(std::string nickname);
 
 	private :
 
@@ -63,6 +80,10 @@ class Server
 		std::map<int, Client*>		clients;
 };
 
+// Server Utils
+
 int	acceptSocket(int socket);
+void	sendToClient(Client *client);
+bool	msgChecks(std::string text);
 
 #endif

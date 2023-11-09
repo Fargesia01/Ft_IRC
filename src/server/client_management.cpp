@@ -19,32 +19,6 @@ int	Server::newClient()
 	return (0);
 }
 
-void	Server::manageClient(Client *client)
-{
-	char	message[BUF_SIZE_MSG];
-	int	readCount;
-
-	memset(message, 0, sizeof(message));
-	readCount = recv(client->getSocket(), message, BUF_SIZE_MSG, 0);
-	if (readCount <= -1)
-	{
-		std::cerr << "[SERVER]: recv() FAILED" << std::endl;
-		deleteClient(client);
-		return ;
-	}
-	else if (readCount == 0)
-	{
-		std::cout << "[SERVER]: A CLIENT JUST DISCONNECTED\n";
-		deleteClient(client);
-		return ;
-	}
-	else
-	{
-	   std::cout << "[CLIENT]: MESSAGE RECEIVED FROM CLIENT : " << client->getSocket() << std::endl << message << std::endl;
-	   client->setReadBuffer(message);
-	}
-}
-
 void	Server::deleteClient(Client *client)
 {
 	int	tmp = client->getSocket();
