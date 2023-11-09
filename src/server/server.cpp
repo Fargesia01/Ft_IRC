@@ -35,9 +35,15 @@ int	Server::serverLoop()
 			else if (polls[i].revents & POLLOUT)
 				handlePollout(clients[polls[i].fd]);
 		}
-		for (int i = 0; i < (int)polls.size(); i++)
+		if (polls.size() == 1)
+			continue ;
+		for (int i = 1; i < (int)polls.size(); i++)
 		{
-			// Parsing and executing the readBuffer for each client
+			int	clientID = polls[i].fd;
+			int	status = clients[clientID]->parse();
+			if (status == 0)
+				execute(clients[clientID]);
+			clients[clientID]->clearAll();
 		}
 	}
 	return (SUCCESS);
@@ -71,8 +77,17 @@ void	Server::handlePollin(Client *client)
 
 void	Server::handlePollout(Client *client)
 {
-	std::cout << "Would send Buffer" << std::endl;
 	sendToClient(client);
+}
+
+void	Server::execute(Client *client)
+{
+	if (cmd_map.find(client->getCmd()) == cmd_map.end())
+	{
+		std::cout << "Error invalid command" << std::endl;
+		return ;
+	}
+	(this->*cmd_map[client->getCmd()])(client, client->getArgs());
 }
 
 // Getters

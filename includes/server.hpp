@@ -49,6 +49,7 @@ class Server
 		int		serverLoop();
 		void		handlePollin(Client *client);
 		void		handlePollout(Client *client);
+		void		execute(Client *client);
 
 		// Commands
 
@@ -56,11 +57,6 @@ class Server
 		void		pass(Client *client, std::vector<std::string> args);
 		void		user(Client *client, std::vector<std::string> args);
 		void		ping(Client *client, std::vector<std::string> args);
-
-		// Parsing
-
-		void		parse(Client *client, std::string text);
-		void		parseSrc(Client *client, std::string text);
 
 		// Getters and Setters
 		
@@ -84,6 +80,5 @@ class Server
 
 int	acceptSocket(int socket);
 void	sendToClient(Client *client);
-bool	msgChecks(std::string text);
 
 #endif

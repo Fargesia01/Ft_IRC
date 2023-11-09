@@ -1,4 +1,4 @@
-#include "server.hpp"
+#include "client.hpp"
 
 /* Several criteria need to be met for the message to be accepted,
 	I'll detail each of the test and opertation I'm doing, in the order:
@@ -18,31 +18,26 @@ We then split the message for it to be correctly handled:
 	5. We finally execute the command
 */
 
-void	Server::parse(Client *client, std::string text)
+int	Client::parse()
 {
-	if (!msgChecks(text))
-		return ;
+	if (readBuffer.empty())
+		return (-1);
+	if (!msgChecks(readBuffer))
+		return (-1);
 
-	text = text.substr(0, text.find("\r\n"));
+	readBuffer = readBuffer.substr(0, readBuffer.find("\r\n"));
 
 	//if (text[0] == ':')
 	//	parseSrc();
 
-	std::vector<std::string> msg = split(text, ' ');
-	std::vector<std::string> args = msg;
-
-	args.erase(args.begin());
-
-	if (cmd_map.find(msg[0]) == cmd_map.end())
-	{
-		std::cout << "Error invalid command" << std::endl;
-		return ;
-	}
-
-	(this->*cmd_map[msg[0]])(client, args);
+	std::vector<std::string> tmp = split(readBuffer, ' ');
+	cmd.cmd = tmp[0];
+	tmp.erase(tmp.begin());
+	cmd.args = tmp;
+	return (0);
 }
 
-void	Server::parseSrc(Client *client, std::string text)
+void	Client::parseSrc(Client *client, std::string text)
 {
 
 }

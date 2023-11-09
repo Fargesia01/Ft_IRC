@@ -6,8 +6,8 @@ SRCS = main.cpp \
 		server/server_utils.cpp \
 		server/server.cpp \
 		client/client.cpp \
+		client/parser.cpp \
 		cmd/NICK.cpp \
-		cmd/parser.cpp \
 		cmd/PASS.cpp \
 		cmd/PING.cpp \
 		cmd/USER.cpp \
