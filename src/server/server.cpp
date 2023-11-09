@@ -35,6 +35,10 @@ int	Server::serverLoop()
 			else if (polls[i].revents & POLLOUT)
 				handlePollout(clients[polls[i].fd]);
 		}
+		for (int i = 0; i < (int)polls.size(); i++)
+		{
+			// Parsing and executing the readBuffer for each client
+		}
 	}
 	return (SUCCESS);
 }
