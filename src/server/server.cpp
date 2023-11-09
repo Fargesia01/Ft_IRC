@@ -71,6 +71,7 @@ void	Server::handlePollin(Client *client)
 
 void	Server::handlePollout(Client *client)
 {
+	std::cout << "Would send Buffer" << std::endl;
 	sendToClient(client);
 }
 

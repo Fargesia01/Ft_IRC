@@ -40,9 +40,6 @@ void	Server::parse(Client *client, std::string text)
 	}
 
 	(this->*cmd_map[msg[0]])(client, args);
-
-	std::cout << clients[0]->getNickname() << std::endl;
-	std::cout << clients[1]->getNickname() << std::endl;
 }
 
 void	Server::parseSrc(Client *client, std::string text)
