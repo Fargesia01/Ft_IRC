@@ -25,7 +25,8 @@ int	Client::parse()
 	if (!msgChecks(readBuffer))
 		return (-1);
 
-	readBuffer = readBuffer.substr(0, readBuffer.find("\r\n"));
+	//readBuffer = readBuffer.substr(0, readBuffer.find("\r\n"));
+	readBuffer = readBuffer.substr(0, readBuffer.find("\n"));
 
 	//if (text[0] == ':')
 	//	parseSrc();

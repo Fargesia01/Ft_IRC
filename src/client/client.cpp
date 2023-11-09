@@ -4,6 +4,8 @@
 
 Client::Client(int socket): socket(socket) 
 {
+	authorized = false;
+	registered = false;
 }
 
 Client::~Client() {};

@@ -98,10 +98,10 @@ Client* Server::getClient(std::string nickname)
 {
 	if (clients.empty())
 		return (NULL);
-	for (int i = 0; i < (int)clients.size(); i++)
+	for (int i = 1; i < (int)polls.size(); i++)
 	{
-		if (clients[i]->getNickname() == nickname)
-			return (clients[i]);
+		if (clients[polls[i].fd]->getNickname() == nickname)
+			return (clients[polls[i].fd]);
 	}
 	return (NULL);
 }
