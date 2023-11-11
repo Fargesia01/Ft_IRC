@@ -28,5 +28,9 @@ void	Server::nick(Client *client, std::vector<std::string> args)
 	else if (client->getAuthorized() == false)
 		std::cout << "Client not authorized" << std::endl;
 	else
+	{
 		client->setNickname(args[0]);
+		if (!client->getRealname().emppty())
+			client->setRegistered(true);
+	}
 }

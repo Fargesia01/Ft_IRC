@@ -33,3 +33,8 @@ void	Server::deleteClient(Client *client)
 	std::cout << "[SERVER]: CLIENT #" << tmp << " DISCONNECTED" << std::endl;
 	std::cout << "[SERVER]: CLIENT DELETED. TOTAL CLIENT IS NOW: " << clients.size() << std::endl;
 }
+
+void	Server::welcomeClient() const
+{
+
+}

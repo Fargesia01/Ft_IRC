@@ -28,10 +28,11 @@ int	Client::parse()
 	//readBuffer = readBuffer.substr(0, readBuffer.find("\r\n"));
 	readBuffer = readBuffer.substr(0, readBuffer.find("\n"));
 
-	//if (text[0] == ':')
-	//	parseSrc();
-
 	std::vector<std::string> tmp = split(readBuffer, ' ');
+
+	if (tmp[0][0] == ':')
+		parseSrc();
+
 	cmd.cmd = tmp[0];
 	tmp.erase(tmp.begin());
 	cmd.args = tmp;
@@ -53,10 +54,11 @@ bool	msgChecks(std::string text)
 		return (false);
 	}
 	//else if (text.find("\r\n") == std::string::npos)
-	//{
-	//	std::cout << "No end chars" << std::endl;
-	//	return (false);
-	//}
+	else if (text.find("\n") == std::string::npos)
+	{
+		std::cout << "No end chars" << std::endl;
+		return (false);
+	}
 	else
 		return (true);
 }
