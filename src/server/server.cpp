@@ -35,16 +35,6 @@ int	Server::serverLoop()
 			else if (polls[i].revents & POLLOUT)
 				handlePollout(clients[polls[i].fd]);
 		}
-		if (polls.size() == 1)
-			continue ;
-		for (int i = 1; i < (int)polls.size(); i++)
-		{
-			int	clientID = polls[i].fd;
-			int	status = clients[clientID]->parse();
-			if (status == 0)
-				execute(clients[clientID]);
-			clients[clientID]->clearAll();
-		}
 	}
 	return (SUCCESS);
 }
@@ -70,14 +60,22 @@ void	Server::handlePollin(Client *client)
 	}
 	else
 	{
-	   std::cout << "[CLIENT]: MESSAGE RECEIVED FROM CLIENT : " << client->getSocket() << std::endl << message << std::endl;
-	   client->setReadBuffer(message);
+		std::cout << "[CLIENT]: MESSAGE RECEIVED FROM CLIENT : " << client->getSocket() << std::endl << message << std::endl;
+		client->setReadBuffer(message);
+		client->parse();
+		for (int j = 0; j < client->getNbrCmds(); j++)
+		{
+			execute(client);
+			client->popCmd();
+		}
+		client->setNbrCmds(0);
 	}
 }
 
 void	Server::handlePollout(Client *client)
 {
 	sendToClient(client);
+	client->clearSendBuffer();
 }
 
 void	Server::execute(Client *client)

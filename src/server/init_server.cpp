@@ -4,6 +4,7 @@ void	Server::createMap()
 {
 	this->cmd_map["NICK"] = &Server::nick;
 	this->cmd_map["PASS"] = &Server::pass;
+	this->cmd_map["USER"] = &Server::user;
 }
 
 int Server::fillServinfo()
