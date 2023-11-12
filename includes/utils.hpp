@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 std::vector<std::string> split(const std::string &str, const char &sep);
 

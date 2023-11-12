@@ -79,7 +79,8 @@ class Server
 
 // Server Utils
 
-int	acceptSocket(int socket);
-void	sendToClient(Client *client);
+int		acceptSocket(int socket);
+void		sendToClient(Client *client);
+std::string	intToString(int nbr);
 
 #endif

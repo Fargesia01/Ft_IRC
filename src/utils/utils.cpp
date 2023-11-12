@@ -18,3 +18,10 @@ std::vector<std::string> split(const std::string &str, const char &sep)
 		tab.push_back(cpy);
 	return (tab);
 }
+
+std::string	intToString(int nbr)
+{
+	std::stringstream oss;
+	oss << nbr;
+	return (oss.str());
+}

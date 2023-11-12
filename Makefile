@@ -11,7 +11,7 @@ SRCS = main.cpp \
 		cmd/PASS.cpp \
 		cmd/PING.cpp \
 		cmd/USER.cpp \
-		utils/split.cpp
+		utils/utils.cpp
 
 SRCS_DIR = src
 SUB_DIR = client cmd server utils
