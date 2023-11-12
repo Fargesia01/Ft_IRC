@@ -24,12 +24,12 @@ class Client
 
 		// Parsing
 
-		int				parse();
-		void				parseSrc(Client *client, std::string text);
+		void				parse();
+		int				parseSrc(std::string text);
 
 		// Utils
 
-		void				clearAll();
+		void				popCmd();
 
 		// Getters and Setters
 
@@ -43,29 +43,33 @@ class Client
 		bool				getAuthorized() const;
 		std::string			getCmd() const;
 		std::vector<std::string>	getArgs() const;
+		int				getNbrCmds() const;
 
 		void				setReadBuffer(std::string buf);
 		void				setSendBuffer(std::string buf);
+		void				clearSendBuffer();
 		void				setUsername(std::string new_name);
 		void				setNickname(std::string new_name);
 		void				setRealname(std::string new_name);
 		void				setRegistered(bool regi);
 		void				setAuthorized(bool auth);
+		void				setNbrCmds(int nbr);
 
 	private :
 
-		int		socket;
-		std::string	readBuffer;
-		std::string	sendBuffer;
+		int			socket;
+		std::string		readBuffer;
+		std::string		sendBuffer;
 
-		t_cmd		cmd;
+		std::vector<t_cmd>	cmds;
+		int			nbr_cmds;
 
-		std::string	nickname;
-		std::string	username;
-		std::string	realname;
+		std::string		nickname;
+		std::string		username;
+		std::string		realname;
 
-		bool		authorized;
-		bool		registered;
+		bool			authorized;
+		bool			registered;
 
 };
 

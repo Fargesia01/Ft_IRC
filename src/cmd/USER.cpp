@@ -14,6 +14,10 @@ void	Server::user(Client *client, std::vector<std::string> args)
 		client->setUsername(args[0]);
 		client->setRealname(args[3]);
 		if (!client->getNickname().empty())
+		{
 			client->setRegistered(true);
+			welcomeClient(client);
+		}
+		std::cout << "Real and User set" << std::endl;
 	}
 }

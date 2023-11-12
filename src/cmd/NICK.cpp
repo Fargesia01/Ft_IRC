@@ -30,7 +30,11 @@ void	Server::nick(Client *client, std::vector<std::string> args)
 	else
 	{
 		client->setNickname(args[0]);
-		if (!client->getRealname().emppty())
+		if (!client->getRealname().empty())
+		{
 			client->setRegistered(true);
+			welcomeClient(client);
+		}
+		std::cout << "Nick registered" << std::endl;
 	}
 }

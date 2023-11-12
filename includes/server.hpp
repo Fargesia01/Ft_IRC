@@ -43,7 +43,7 @@ class Server
 
 		int		newClient();
 		void		deleteClient(Client *client);
-		void		welcomeClient() const;
+		void		welcomeClient(Client *client) const;
 
 		// Server management
 

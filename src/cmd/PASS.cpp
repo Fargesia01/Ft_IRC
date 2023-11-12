@@ -17,5 +17,8 @@ void	Server::pass(Client *client, std::vector<std::string> args)
 	else if (args[0] != this->password)
 		std::cout << ERR_PASSWDMISMATCH(client->getNickname()) << std::endl;
 	else
+	{
 		client->setAuthorized(true);
+		std::cout << "Client authorized" << std::endl;
+	}
 }

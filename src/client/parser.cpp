@@ -18,30 +18,43 @@ We then split the message for it to be correctly handled:
 	5. We finally execute the command
 */
 
-int	Client::parse()
+void	Client::parse()
 {
-	if (readBuffer.empty())
-		return (-1);
-	if (!msgChecks(readBuffer))
-		return (-1);
+	std::string	actual;
+	t_cmd		cmd;
+	while (!readBuffer.empty())
+	{
+		std::cout << "OK :" << readBuffer.size() << std::endl;
+		if (readBuffer.empty())
+			return ;
+		if (!msgChecks(readBuffer))
+			return ;
 
-	//readBuffer = readBuffer.substr(0, readBuffer.find("\r\n"));
-	readBuffer = readBuffer.substr(0, readBuffer.find("\n"));
+		actual = readBuffer.substr(0, readBuffer.find("\r\n"));
+		readBuffer.erase(0, readBuffer.find("\r\n") + 2);
+		//readBuffer = readBuffer.substr(0, readBuffer.find("\n"));
+		//readBuffer.erase(0, readBuffer.find("\n"));
 
-	std::vector<std::string> tmp = split(readBuffer, ' ');
+		std::vector<std::string> tmp = split(actual, ' ');
 
-	if (tmp[0][0] == ':')
-		parseSrc();
+		if (tmp[0][0] == ':')
+		{
+			if (parseSrc(tmp[0]) == 0)
+				tmp.erase(tmp.begin());
+		}
 
-	cmd.cmd = tmp[0];
-	tmp.erase(tmp.begin());
-	cmd.args = tmp;
-	return (0);
+		cmd.cmd = tmp[0];
+		tmp.erase(tmp.begin());
+		cmd.args = tmp;
+		cmds.push_back(cmd);
+		nbr_cmds++;
+	}
+	readBuffer.clear();
 }
 
-void	Client::parseSrc(Client *client, std::string text)
+int	Client::parseSrc(std::string text)
 {
-
+	return (0);
 }
 
 bool	msgChecks(std::string text)
@@ -53,8 +66,7 @@ bool	msgChecks(std::string text)
 		std::cout << "Message too long" << std::endl;
 		return (false);
 	}
-	//else if (text.find("\r\n") == std::string::npos)
-	else if (text.find("\n") == std::string::npos)
+	else if (text.find("\r\n") == std::string::npos)
 	{
 		std::cout << "No end chars" << std::endl;
 		return (false);
