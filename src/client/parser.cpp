@@ -54,6 +54,11 @@ void	Client::parse()
 
 int	Client::parseSrc(std::string text)
 {
+	if (text.find("!") == std::string::npos)
+		return (-1);
+	text.erase(0, text.find("!") + 1);
+	if (text.find("@") == std::string::npos)
+		return (-1);
 	return (0);
 }
 
