@@ -16,7 +16,7 @@ void	Server::join(Client *client, std::vector<std::string> args)
 		channel->addClient(client);
 		channels.insert(std::make_pair(args[0], channel));
 		client->setSendBuffer(client->getNickname() + " JOIN " + args[0] + "\r\n");
-		//topic(client, args)
-		//names(client, args)
+		topic(client, args);
+		names(client, args);
 	}
 }

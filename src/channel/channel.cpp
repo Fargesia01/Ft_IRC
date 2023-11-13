@@ -43,9 +43,10 @@ bool	Channel::isOps(Client *client)
 
 // Getters and Setters
 
-std::string	Channel::getPassword() const { return (password); }
-std::string	Channel::getName() const { return (name); }
-std::string	Channel::getTopic() const { return (topic); }
+std::string		Channel::getPassword() const { return (password); }
+std::string		Channel::getName() const { return (name); }
+std::string		Channel::getTopic() const { return (topic); }
+std::vector<Client *>	Channel::getClients() const { return (clients); }
 
 void		Channel::setPassword(std::string pass) { password = pass; }
 void		Channel::setName(std::string new_name) { name = new_name; }

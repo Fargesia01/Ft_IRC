@@ -7,7 +7,9 @@ void	Server::topic(Client *client, std::vector<std::string> args)
 		client->setSendBuffer(ERR_NEEDMOREPARAMS(client->getNickname(), "TOPIC"));
 		return ;
 	}
-	else if (channels.find(args[0]) == channels.end())
+	if (args[0][0] == ':')
+		args[0] = args[0].substr(1);
+	if (channels.find(args[0]) == channels.end())
 	{
 		client->setSendBuffer(ERR_NOSUCHCHANNEL(client->getNickname(), args[0]));
 		return ;

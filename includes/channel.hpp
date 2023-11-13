@@ -24,9 +24,10 @@ class Channel
 
 		// Getters and Setters
 
-		std::string	getPassword() const;
-		std::string	getName() const;
-		std::string	getTopic() const;
+		std::string		getPassword() const;
+		std::string		getName() const;
+		std::string		getTopic() const;
+		std::vector<Client *>	getClients() const;
 
 		void		setPassword(std::string pass);
 		void		setName(std::string new_name);

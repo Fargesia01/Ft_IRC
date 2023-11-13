@@ -61,7 +61,7 @@ class Server
 		void		ping(Client *client, std::vector<std::string> args);
 		void		join(Client *client, std::vector<std::string> args);
 		void		topic(Client *client, std::vector<std::string> args);
-		//void		names(Client *client, std::vector<std::string> args);
+		void		names(Client *client, std::vector<std::string> args);
 
 		// Getters and Setters
 		

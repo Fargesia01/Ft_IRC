@@ -1,0 +1,3 @@
+Finish JOIN
+Verify NAMES et TOPIC
+Régler TOPIC avec Hexchat ou utiliser autre client

@@ -7,6 +7,7 @@ void	Server::createMap()
 	this->cmd_map["USER"] = &Server::user;
 	this->cmd_map["JOIN"] = &Server::join;
 	this->cmd_map["TOPIC"] = &Server::topic;
+	this->cmd_map["NAMES"] = &Server::names;
 }
 
 int Server::fillServinfo()
