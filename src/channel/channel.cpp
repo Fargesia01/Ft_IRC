@@ -9,7 +9,7 @@ Channel::Channel(std::string name): name(name)
 
 Channel::~Channel() {};
 
-// Utils
+// Add and Remove client and ops
 
 void	Channel::addOps(Client *client)
 {
@@ -19,6 +19,40 @@ void	Channel::addOps(Client *client)
 void	Channel::addClient(Client *client)
 {
 	clients.push_back(client);
+}
+
+void	Channel::rmClient(Client *client)
+{
+	for (int i = 0; i < (int)clients.size(); i++)
+	{
+		if (clients[i] == client)
+		{
+			clients.erase(clients.begin() + i);
+			return ;
+		}
+	}
+}
+
+void	Channel::rmOps(Client *client)
+{
+	for (int i = 0; i < (int)ops.size(); i++)
+	{
+		if (ops[i] == client)
+		{
+			ops.erase(ops.begin() + i);
+			return ;
+		}
+	}
+}
+
+// Utils
+
+void	Channel::sendToAll(std::string msg)
+{
+	for (int i = 0; i < (int)clients.size(); i++)
+	{
+		clients[i]->setSendBuffer(msg);
+	}
 }
 
 bool	Channel::isMember(Client *client)

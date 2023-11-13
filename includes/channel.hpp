@@ -15,12 +15,18 @@ class Channel
 		Channel(std::string name);
 		~Channel();
 
-		// Utils
+		// Add and Remove client and ops
 
 		void	addOps(Client *client);
 		void	addClient(Client *client);
+		void	rmClient(Client *client);
+		void	rmOps(Client *client);
+
+		// Utils
+
 		bool	isMember(Client *client);
 		bool	isOps(Client *client);
+		void	sendToAll(std::string msg);
 
 		// Getters and Setters
 

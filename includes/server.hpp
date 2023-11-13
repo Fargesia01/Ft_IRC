@@ -62,6 +62,7 @@ class Server
 		void		join(Client *client, std::vector<std::string> args);
 		void		topic(Client *client, std::vector<std::string> args);
 		void		names(Client *client, std::vector<std::string> args);
+		void		part(Client *client, std::vector<std::string> args);
 
 		// Getters and Setters
 		

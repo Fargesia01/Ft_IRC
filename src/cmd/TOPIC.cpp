@@ -35,7 +35,7 @@ void	Server::topic(Client *client, std::vector<std::string> args)
 		else
 		{
 			channel->setTopic(args[1]);
-			client->setSendBuffer("Changed topic");
+			channel->sendToAll(RPL_TOPIC(client->getNickname(), args[0], args[1]));
 		}
 	}
 }

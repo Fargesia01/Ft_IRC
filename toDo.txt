@@ -1,3 +1,4 @@
 Finish JOIN
-Verify NAMES et TOPIC
 Régler TOPIC avec Hexchat ou utiliser autre client
+JOIN add l'argument 0 qui fait tout quitter les channels -> NEED PART
+PART qui fait quitter le channel en argument
