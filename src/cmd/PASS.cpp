@@ -11,11 +11,11 @@ If everything is clear, registers the client
 void	Server::pass(Client *client, std::vector<std::string> args)
 {
 	if (args.empty() || args[0].empty())
-		std::cout << ERR_NEEDMOREPARAMS(client->getNickname(), "PASS") << std::endl; 
+		client->setSendBuffer(ERR_NEEDMOREPARAMS(client->getNickname(), "PASS")); 
 	else if (client->getAuthorized() == true)
-		std::cout << ERR_ALREADYREGISTERED(client->getNickname()) << std::endl;
+		client->setSendBuffer(ERR_ALREADYREGISTERED(client->getNickname()));
 	else if (args[0] != this->password)
-		std::cout << ERR_PASSWDMISMATCH(client->getNickname()) << std::endl;
+		client->setSendBuffer(ERR_PASSWDMISMATCH(client->getNickname()));
 	else
 	{
 		client->setAuthorized(true);
