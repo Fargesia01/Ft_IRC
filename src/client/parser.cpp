@@ -24,7 +24,6 @@ void	Client::parse()
 	t_cmd		cmd;
 	while (!readBuffer.empty())
 	{
-		std::cout << "OK :" << readBuffer.size() << std::endl;
 		if (readBuffer.empty())
 			return ;
 		if (!msgChecks(readBuffer))

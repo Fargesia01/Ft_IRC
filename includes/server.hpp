@@ -13,6 +13,7 @@
 #include "client.hpp"
 #include "defines.h"
 #include "utils.hpp"
+#include "channel.hpp"
 
 #define SUCCESS 0
 #define BACKLOG 10
@@ -58,6 +59,9 @@ class Server
 		void		pass(Client *client, std::vector<std::string> args);
 		void		user(Client *client, std::vector<std::string> args);
 		void		ping(Client *client, std::vector<std::string> args);
+		void		join(Client *client, std::vector<std::string> args);
+		void		topic(Client *client, std::vector<std::string> args);
+		//void		names(Client *client, std::vector<std::string> args);
 
 		// Getters and Setters
 		
@@ -67,20 +71,20 @@ class Server
 
 	private :
 
-		struct addrinfo			*servinfo;
-		int				server_socket;
-		std::vector<pollfd>		polls;
-		std::string			port;
-		std::string			password;
-		std::string			datetime;
-		std::map<std::string, cmdPtr>	cmd_map;
-		std::map<int, Client*>		clients;
+		struct addrinfo				*servinfo;
+		int					server_socket;
+		std::vector<pollfd>			polls;
+		std::string				port;
+		std::string				password;
+		std::string				datetime;
+		std::map<std::string, cmdPtr>		cmd_map;
+		std::map<int, Client*>			clients;
+		std::map<std::string, Channel *>	channels;
 };
 
 // Server Utils
 
 int		acceptSocket(int socket);
 void		sendToClient(Client *client);
-std::string	intToString(int nbr);
 
 #endif

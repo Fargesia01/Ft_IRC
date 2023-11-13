@@ -14,12 +14,20 @@
 #define RPL_LUSEROP(client, nbrOps) ("252 " + client + " " + nbrOps + ": operator(s) online\r\n")
 #define RPL_LUSERCHANNELS(client, nbrChan) ("254 " + client + " " + nbrChan + ": channels formed\r\n")
 #define RPL_LUSERME(client, nbrClient) ("255 " + client + " : I have " + nbrClient + " clients and 1 servers\r\n")
+#define RPL_NOTOPIC(client, channel) ("331 " + client + " " + channel + " :No topic is set\r\n")
+#define RPL_TOPIC(client, channel, topic) ("332 " + client + " " + channel + " :" + topic + "\r\n")
+#define RPL_NAMREPLY(client, channel, target) ("353 " + client + " = " + channel + " " + target)
+#define ERR_NOSUCHCHANNEL(client, channel) ("403 " + client + " " + channel + " :No such channel\r\n")
 #define ERR_NONICKNAMEGIVEN(client) ("431 " + client + " :No nickname given\r\n")
 #define ERR_ERRONEUSNICKNAME(client, nick) ("432 " + client + " " + nick + " :Erroneus nickname\r\n")
 #define ERR_NICKNAMEINUSE(client, nick) ("433 " + client + " " + nick + " :Nickname is already in use\r\n")
+#define ERR_NOTONCHANNEL(client, channel) ("442 " + client + " " + channel + " :You're not on that channel\r\n")
+#define ERR_NOTREGISTERED(client) ("451 " + client + " :You have not registered\r\n")
 #define ERR_NEEDMOREPARAMS(client, cmd) ("461 " + client + " " + cmd + ": Not enough parameters\r\n")
 #define ERR_ALREADYREGISTERED(client) ("462 " + client + " :You may not reregister\r\n")
 #define ERR_PASSWDMISMATCH(client) ("464 " + client + " :Password incorrect\r\n")
+#define ERR_BADCHANMASK(channel) ("476 " + channel + " :Bad channel mask\r\n")
+#define ERR_CHANOPRIVSNEEDED(client, channel) ("482 " + client + " " + channel + " :You're not channel operator\r\n")
 
 #define VALID_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[]{}\\|"
 
