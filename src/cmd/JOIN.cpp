@@ -38,6 +38,7 @@ void	Server::join(Client *client, std::vector<std::string> args)
 		return ;
 	}
 	channel->addClient(client);
+	channel->rmInvited(client);
 	channel->sendToAll(client->getNickname() + " JOIN " + args[0] + "\r\n");
 	topic(client, args);
 	names(client, args);

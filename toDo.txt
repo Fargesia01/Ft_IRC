@@ -1,5 +1,4 @@
 Finish JOIN
 Régler TOPIC avec Hexchat ou utiliser autre client
 MODE
-KICK
-INVITE
+INVITE (invite only) condition

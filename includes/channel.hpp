@@ -19,13 +19,16 @@ class Channel
 
 		void	addOps(Client *client);
 		void	addClient(Client *client);
+		void	addInvited(Client *client);
 		void	rmClient(Client *client);
 		void	rmOps(Client *client);
+		void	rmInvited(Client *client);
 
 		// Utils
 
 		bool	isMember(Client *client);
 		bool	isMember(std::string client_name);
+		bool	isInvited(Client *client);
 		bool	isOps(Client *client);
 		void	sendToAll(std::string msg);
 
@@ -47,6 +50,7 @@ class Channel
 		std::string		topic;
 		std::vector<Client *>	clients;
 		std::vector<Client *>	ops;
+		std::vector<Client *>	invited;
 
 };
 
