@@ -65,6 +65,16 @@ bool	Channel::isMember(Client *client)
 	return (false);
 }
 
+bool	Channel::isMember(std::string client_name)
+{
+	for (int i = 0; i < (int)clients.size(); i++)
+	{
+		if (client_name == clients[i]->getNickname())
+			return (true);
+	}
+	return (false);
+}
+
 bool	Channel::isOps(Client *client)
 {
 	for (int i = 0; i < (int)ops.size(); i++)

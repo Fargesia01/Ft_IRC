@@ -25,6 +25,7 @@ class Channel
 		// Utils
 
 		bool	isMember(Client *client);
+		bool	isMember(std::string client_name);
 		bool	isOps(Client *client);
 		void	sendToAll(std::string msg);
 

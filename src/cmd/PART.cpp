@@ -27,3 +27,26 @@ void	Server::part(Client *client, std::vector<std::string> args)
 	if (channel->getClients().size() == 0)
 		channels.erase(channels.find(channel->getName()));
 }
+
+void	Server::partAll(Client *client)
+{
+	for (std::map<std::string, Channel *>::iterator it = channels.begin(); it != channels.end();)
+	{
+		if (it->second->isMember(client))
+		{
+			it->second->rmClient(client);
+			if (it->second->getClients().size() == 0)
+			{
+				delete it->second;
+				channels.erase(it++);
+			}
+			else
+			{
+				it->second->sendToAll(client->getNickname() + " PART " + it->first + " :Leaving");
+				++it;
+			}
+		}
+		else
+			++it;
+	}
+}

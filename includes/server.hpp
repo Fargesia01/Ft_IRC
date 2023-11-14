@@ -63,6 +63,8 @@ class Server
 		void		topic(Client *client, std::vector<std::string> args);
 		void		names(Client *client, std::vector<std::string> args);
 		void		part(Client *client, std::vector<std::string> args);
+		void		partAll(Client *client);
+		void		kick(Client *client, std::vector<std::string> args);
 
 		// Getters and Setters
 		
