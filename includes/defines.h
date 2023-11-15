@@ -14,6 +14,7 @@
 #define RPL_LUSEROP(client, nbrOps) ("252 " + client + " " + nbrOps + ": operator(s) online\r\n")
 #define RPL_LUSERCHANNELS(client, nbrChan) ("254 " + client + " " + nbrChan + ": channels formed\r\n")
 #define RPL_LUSERME(client, nbrClient) ("255 " + client + " : I have " + nbrClient + " clients and 1 servers\r\n")
+#define RPL_CHANNELMODEIS(client, channel, mode) ("324 " + client + " " + channel + " " + mode + "\r\n")
 #define RPL_NOTOPIC(client, channel) ("331 " + client + " " + channel + " :No topic is set\r\n")
 #define RPL_TOPIC(client, channel, topic) ("332 " + client + " " + channel + " :" + topic + "\r\n")
 #define RPL_INVITING(client, channel, nick) ("341 " + client + " " + nick + " " + channel + "\r\n")
@@ -30,6 +31,8 @@
 #define ERR_NEEDMOREPARAMS(client, cmd) ("461 " + client + " " + cmd + ": Not enough parameters\r\n")
 #define ERR_ALREADYREGISTERED(client) ("462 " + client + " :You may not reregister\r\n")
 #define ERR_PASSWDMISMATCH(client) ("464 " + client + " :Password incorrect\r\n")
+#define ERR_INVITEONLYCHAN(client, channel) ("473 " + client + " " + channel + " :Cannot join channel (+i)\r\n")
+#define ERR_BADCHANNELKEY(client, channel) ("475 " + client + " " + channel + " :Cannot join channel (+k)\r\n")
 #define ERR_BADCHANMASK(channel) ("476 " + channel + " :Bad channel mask\r\n")
 #define ERR_CHANOPRIVSNEEDED(client, channel) ("482 " + client + " " + channel + " :You're not channel operator\r\n")
 

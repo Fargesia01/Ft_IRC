@@ -1,4 +1,5 @@
-Finish JOIN
 Régler TOPIC avec Hexchat ou utiliser autre client
-MODE
-INVITE (invite only) condition
+MODE (O + L)
+Moduler JOIN selon MODE
+
+getter, setter, sendModes()

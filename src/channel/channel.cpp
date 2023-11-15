@@ -119,6 +119,28 @@ std::string		Channel::getName() const { return (name); }
 std::string		Channel::getTopic() const { return (topic); }
 std::vector<Client *>	Channel::getClients() const { return (clients); }
 
+bool			Channel::getMode(char mode) const
+{
+	if (mode == 'i')
+		return (i_only);
+	else if (mode == 't')
+		return (op_topic);
+	else if (mode == 'k')
+		return (pass_req);
+	return (false);
+}
+
 void		Channel::setPassword(std::string pass) { password = pass; }
 void		Channel::setName(std::string new_name) { name = new_name; }
 void		Channel::setTopic(std::string new_topic) { topic = new_topic; }
+
+void		Channel::setMode(char mode, bool value)
+{
+	if (mode == 'i')
+		i_only = value;
+	else if (mode == 't')
+		op_topic = value;
+	else if (mode == 'k')
+		pass_req = value;
+	return ;
+}

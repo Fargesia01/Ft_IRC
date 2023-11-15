@@ -17,6 +17,7 @@ SRCS = main.cpp \
 		cmd/PART.cpp \
 		cmd/KICK.cpp \
 		cmd/INVITE.cpp \
+		cmd/MODE.cpp \
 		channel/channel.cpp \
 		utils/utils.cpp
 

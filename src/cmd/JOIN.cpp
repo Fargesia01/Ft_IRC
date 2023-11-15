@@ -37,6 +37,16 @@ void	Server::join(Client *client, std::vector<std::string> args)
 		client->setSendBuffer(client->getNickname() + " already in channel " + channel->getName() + "\r\n");
 		return ;
 	}
+	if (channel->getMode('i') && !channel->isInvited(client))
+	{
+		client->setSendBuffer(ERR_INVITEONLYCHAN(client->getNickname(), args[0]));
+		return ;
+	}
+	if (channel->getMode('k') && ((int)args.size() < 2 || channel->getPassword() != args[1]))
+	{
+		client->setSendBuffer(ERR_BADCHANNELKEY(client->getNickname(), args[0]));
+		return ;
+	}
 	channel->addClient(client);
 	channel->rmInvited(client);
 	channel->sendToAll(client->getNickname() + " JOIN " + args[0] + "\r\n");
