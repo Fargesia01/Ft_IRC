@@ -7,6 +7,9 @@ SRCS = main.cpp \
 		server/server.cpp \
 		client/client.cpp \
 		client/parser.cpp \
+		cmd/INVITE.cpp \
+		cmd/KICK.cpp \
+		cmd/MODE.cpp \
 		cmd/NICK.cpp \
 		cmd/PASS.cpp \
 		cmd/PING.cpp \

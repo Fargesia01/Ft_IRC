@@ -21,6 +21,11 @@ void	Channel::addClient(Client *client)
 	clients.push_back(client);
 }
 
+void	Channel::addInvited(Client *client)
+{
+	invited.push_back(client);
+}
+
 void	Channel::rmClient(Client *client)
 {
 	for (int i = 0; i < (int)clients.size(); i++)
@@ -40,6 +45,18 @@ void	Channel::rmOps(Client *client)
 		if (ops[i] == client)
 		{
 			ops.erase(ops.begin() + i);
+			return ;
+		}
+	}
+}
+
+void	Channel::rmInvited(Client *client)
+{
+	for (int i = 0; i < (int)invited.size(); i++)
+	{
+		if (invited[i] == client)
+		{
+			invited.erase(invited.begin() + i);
 			return ;
 		}
 	}
@@ -69,6 +86,26 @@ bool	Channel::isMember(Client *client)
 	for (int i = 0; i < (int)clients.size(); i++)
 	{
 		if (client == clients[i])
+			return (true);
+	}
+	return (false);
+}
+
+bool	Channel::isMember(std::string client_name)
+{
+	for (int i = 0; i < (int)clients.size(); i++)
+	{
+		if (client_name == clients[i]->getNickname())
+			return (true);
+	}
+	return (false);
+}
+
+bool	Channel::isInvited(Client *client)
+{
+	for (int i = 0; i < (int)invited.size(); i++)
+	{
+		if (client == invited[i])
 			return (true);
 	}
 	return (false);

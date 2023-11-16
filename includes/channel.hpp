@@ -19,13 +19,17 @@ class Channel
 
 		void	addOps(Client *client);
 		void	addClient(Client *client);
+		void	addInvited(Client *client);
 		void	rmClient(Client *client);
 		void	rmOps(Client *client);
+		void	rmInvited(Client *client);
 
 		// Utils
 
 		bool	isMember(Client *client);
+		bool	isMember(std::string client_name);
 		bool	isOps(Client *client);
+		bool	isInvited(Client *client);
 		void	sendToAll(std::string msg);
 		void	clientToAll(std::string msg, int fd);
 

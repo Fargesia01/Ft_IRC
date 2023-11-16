@@ -12,6 +12,9 @@ void	Server::createMap()
 	this->cmd_map["PART"] = &Server::part;
 	this->cmd_map["PRIVMSG"] = &Server::privmsg;
 	this->cmd_map["NOTICE"] = &Server::notice;
+	this->cmd_map["MODE"] = &Server::mode;
+	this->cmd_map["KICK"] = &Server::kick;
+	this->cmd_map["INVITE"] = &Server::invite;
 }
 
 int Server::fillServinfo()
