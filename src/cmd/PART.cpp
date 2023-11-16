@@ -18,35 +18,11 @@ void	Server::part(Client *client, std::vector<std::string> args)
 		client->setSendBuffer(ERR_NOTONCHANNEL(client->getNickname(), args[0]));
 		return ;
 	}
-	if (args.size() > 1)
-		channel->sendToAll(client->getNickname() + " PART " + args[0] + " :" + args[1] + "\r\n");
-	else
-		channel->sendToAll(client->getNickname() + " PART " + args[0] + " :Leaving\r\n");
+	std::string reason;
+	reason.erase();
+	channel->sendToAll(RPL_PART(user_id(client->getNickname(), client->getUsername()), channel->getName(), reason));
 	channel->rmClient(client);
 	channel->rmOps(client);
 	if (channel->getClients().size() == 0)
 		channels.erase(channels.find(channel->getName()));
-}
-
-void	Server::partAll(Client *client)
-{
-	for (std::map<std::string, Channel *>::iterator it = channels.begin(); it != channels.end();)
-	{
-		if (it->second->isMember(client))
-		{
-			it->second->rmClient(client);
-			if (it->second->getClients().size() == 0)
-			{
-				delete it->second;
-				channels.erase(it++);
-			}
-			else
-			{
-				it->second->sendToAll(client->getNickname() + " PART " + it->first + " :Leaving");
-				++it;
-			}
-		}
-		else
-			++it;
-	}
 }

@@ -5,13 +5,13 @@ void	Server::createMap()
 	this->cmd_map["NICK"] = &Server::nick;
 	this->cmd_map["PASS"] = &Server::pass;
 	this->cmd_map["USER"] = &Server::user;
+	this->cmd_map["PING"] = &Server::ping;
 	this->cmd_map["JOIN"] = &Server::join;
 	this->cmd_map["TOPIC"] = &Server::topic;
 	this->cmd_map["NAMES"] = &Server::names;
 	this->cmd_map["PART"] = &Server::part;
-	this->cmd_map["KICK"] = &Server::kick;
-	this->cmd_map["INVITE"] = &Server::invite;
-	this->cmd_map["MODE"] = &Server::mode;
+	this->cmd_map["PRIVMSG"] = &Server::privmsg;
+	this->cmd_map["NOTICE"] = &Server::notice;
 }
 
 int Server::fillServinfo()

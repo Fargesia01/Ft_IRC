@@ -20,6 +20,8 @@ int	Server::serverLoop()
 		int status = poll(polls.data(), polls.size(), -1);
 		if (status == -1)
 		{
+			if (errno == EINTR)
+				break;
 			std::cout << "Error in poll() call" << std::endl;
 			return (-1);
 		}
@@ -60,7 +62,7 @@ void	Server::handlePollin(Client *client)
 	}
 	else
 	{
-		std::cout << "[CLIENT]: MESSAGE RECEIVED FROM CLIENT : " << client->getSocket() << std::endl << message << std::endl;
+		std::cout << "[CLIENT]: MESSAGE RECEIVED FROM CLIENT " << client->getSocket() << std::endl << message << std::endl;
 		client->setReadBuffer(message);
 		client->parse();
 		for (int j = 0; j < client->getNbrCmds(); j++)
@@ -100,6 +102,18 @@ Client* Server::getClient(std::string nickname)
 	{
 		if (clients[polls[i].fd]->getNickname() == nickname)
 			return (clients[polls[i].fd]);
+	}
+	return (NULL);
+}
+
+Channel* Server::getChannel(std::string name)
+{
+	if (channels.empty())
+		return (NULL);
+	for (std::map<std::string, Channel *>::iterator it = channels.begin(); it != channels.end(); it++)
+	{
+		if (it->first == name)
+			return (it->second);
 	}
 	return (NULL);
 }
