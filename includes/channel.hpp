@@ -19,18 +19,15 @@ class Channel
 
 		void	addOps(Client *client);
 		void	addClient(Client *client);
-		void	addInvited(Client *client);
 		void	rmClient(Client *client);
 		void	rmOps(Client *client);
-		void	rmInvited(Client *client);
 
 		// Utils
 
 		bool	isMember(Client *client);
-		bool	isMember(std::string client_name);
-		bool	isInvited(Client *client);
 		bool	isOps(Client *client);
 		void	sendToAll(std::string msg);
+		void	clientToAll(std::string msg, int fd);
 
 		// Getters and Setters
 
@@ -38,12 +35,10 @@ class Channel
 		std::string		getName() const;
 		std::string		getTopic() const;
 		std::vector<Client *>	getClients() const;
-		bool			getMode(char mode) const;
 
 		void		setPassword(std::string pass);
 		void		setName(std::string new_name);
 		void		setTopic(std::string);
-		void		setMode(char mode, bool value);
 
 	private :
 
@@ -52,10 +47,6 @@ class Channel
 		std::string		topic;
 		std::vector<Client *>	clients;
 		std::vector<Client *>	ops;
-		std::vector<Client *>	invited;
-		bool			i_only;
-		bool			op_topic;
-		bool			pass_req;
 
 };
 

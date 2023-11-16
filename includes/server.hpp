@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <vector>
 #include <poll.h>
+#include <cerrno>
 #include <sstream>
 #include "client.hpp"
 #include "defines.h"
@@ -63,18 +64,15 @@ class Server
 		void		topic(Client *client, std::vector<std::string> args);
 		void		names(Client *client, std::vector<std::string> args);
 		void		part(Client *client, std::vector<std::string> args);
-		void		partAll(Client *client);
-		void		kick(Client *client, std::vector<std::string> args);
-		void		invite(Client *client, std::vector<std::string> args);
-		void		mode(Client *client, std::vector<std::string> args);
-		void		sendModes(Client *client, Channel *channel);
-		void		changeModes(Client *client, Channel *channel, std::string arg);
+		void		privmsg(Client *client, std::vector<std::string> args);
+		void		notice(Client *client, std::vector<std::string> args);
 
 		// Getters and Setters
 		
 		std::string	getPassword() const;
 		void		setDatetime(struct tm *timeinfo);
 		Client*		getClient(std::string nickname);
+		Channel*	getChannel(std::string name);
 
 	private :
 
