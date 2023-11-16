@@ -1,15 +1,5 @@
 #include "server.hpp"
 
-// Checks wether the nickname contains only allowed chars
-
-bool	validNick(std::string nick)
-{
-	if (nick.find_first_not_of(VALID_CHARS) != std::string::npos)
-		return (false);
-	else
-		return (true);
-}
-
 /* List checks:
 	1. No parameters given
 	2. Forbidden chars in nickname
@@ -20,11 +10,11 @@ If everything is clear, sets the nickname to arg[0]*/
 void	Server::nick(Client *client, std::vector<std::string> args)
 {
 	if (args.empty() || args[0].empty())
-		std::cout << ERR_NONICKNAMEGIVEN(client->getNickname()) << std::endl;
-	else if (!validNick(args[0]))
-		std::cout << ERR_ERRONEUSNICKNAME(client->getNickname(), args[0]) << std::endl;
+		client->setSendBuffer(ERR_NONICKNAMEGIVEN(client->getNickname()));
+	else if (!validName(args[0]))
+		client->setSendBuffer(ERR_ERRONEUSNICKNAME(client->getNickname(), args[0]));
 	else if (this->getClient(args[0]))
-		std::cout << ERR_NICKNAMEINUSE(client->getNickname(), args[0]) << std::endl;
+		client->setSendBuffer(ERR_NICKNAMEINUSE(client->getNickname(), args[0]));
 	else if (client->getAuthorized() == false)
 		std::cout << "Client not authorized" << std::endl;
 	else

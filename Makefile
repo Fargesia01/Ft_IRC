@@ -1,4 +1,4 @@
-NAME = ft_irc
+NAME = ircserv
 
 SRCS = main.cpp \
 		server/client_management.cpp \
@@ -11,10 +11,18 @@ SRCS = main.cpp \
 		cmd/PASS.cpp \
 		cmd/PING.cpp \
 		cmd/USER.cpp \
+		cmd/JOIN.cpp \
+		cmd/TOPIC.cpp \
+		cmd/NAMES.cpp \
+		cmd/PART.cpp \
+		cmd/KICK.cpp \
+		cmd/INVITE.cpp \
+		cmd/MODE.cpp \
+		channel/channel.cpp \
 		utils/utils.cpp
 
 SRCS_DIR = src
-SUB_DIR = client cmd server utils
+SUB_DIR = client cmd server utils channel
 
 OBJS = $(SRCS:.cpp=.o)
 OBJS_DIR = obj

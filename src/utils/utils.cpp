@@ -6,7 +6,7 @@ std::vector<std::string> split(const std::string &str, const char &sep)
 	std::vector<std::string> tab;
 	std::string::size_type	pos = cpy.find(sep);
 	
-	while (pos != std::string::npos)
+	while (pos != std::string::npos && !cpy.empty())
 	{
 		tab.push_back(cpy.substr(0, pos));
 		cpy.erase(0, pos + 1);
@@ -24,4 +24,12 @@ std::string	intToString(int nbr)
 	std::stringstream oss;
 	oss << nbr;
 	return (oss.str());
+}
+
+bool	validName(std::string name)
+{
+	if (name.find_first_not_of(VALID_CHARS) != std::string::npos)
+		return (false);
+	else
+		return (true);
 }
