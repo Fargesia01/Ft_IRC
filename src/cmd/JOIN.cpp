@@ -47,6 +47,11 @@ void	Server::join(Client *client, std::vector<std::string> args)
 		client->setSendBuffer(ERR_BADCHANNELKEY(client->getNickname(), args[0]));
 		return ;
 	}
+	if (channel->getMode('l') && (int)channel->getClients().size() == channel->getUserLimit())
+	{
+		client->setSendBuffer(ERR_CHANNELISFULL(client->getNickname(), args[0]));
+		return ;
+	}
 	channel->addClient(client);
 	channel->rmInvited(client);
 	channel->sendToAll(client->getNickname() + " JOIN " + args[0] + "\r\n");

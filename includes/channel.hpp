@@ -39,11 +39,13 @@ class Channel
 		std::string		getTopic() const;
 		std::vector<Client *>	getClients() const;
 		bool			getMode(char mode) const;
+		int			getUserLimit() const;
 
 		void		setPassword(std::string pass);
 		void		setName(std::string new_name);
 		void		setTopic(std::string);
 		void		setMode(char mode, bool value);
+		void		setUserLimit(int new_limit);
 
 	private :
 
@@ -56,6 +58,8 @@ class Channel
 		bool			i_only;
 		bool			op_topic;
 		bool			pass_req;
+		unsigned int		limit;
+		bool			user_limit;
 
 };
 

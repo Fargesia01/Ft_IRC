@@ -118,6 +118,7 @@ std::string		Channel::getPassword() const { return (password); }
 std::string		Channel::getName() const { return (name); }
 std::string		Channel::getTopic() const { return (topic); }
 std::vector<Client *>	Channel::getClients() const { return (clients); }
+int			Channel::getUserLimit() const { return (limit); }
 
 bool			Channel::getMode(char mode) const
 {
@@ -127,12 +128,15 @@ bool			Channel::getMode(char mode) const
 		return (op_topic);
 	else if (mode == 'k')
 		return (pass_req);
+	else if (mode == 'l')
+		return (user_limit);
 	return (false);
 }
 
 void		Channel::setPassword(std::string pass) { password = pass; }
 void		Channel::setName(std::string new_name) { name = new_name; }
 void		Channel::setTopic(std::string new_topic) { topic = new_topic; }
+void		Channel::setUserLimit(int new_limit) { limit = new_limit; }
 
 void		Channel::setMode(char mode, bool value)
 {
@@ -142,5 +146,7 @@ void		Channel::setMode(char mode, bool value)
 		op_topic = value;
 	else if (mode == 'k')
 		pass_req = value;
+	else if (mode == 'l')
+		user_limit = value;
 	return ;
 }
