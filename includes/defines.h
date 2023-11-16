@@ -28,6 +28,9 @@
 #define ERR_NEEDMOREPARAMS(client, cmd) ("461 " + client + " " + cmd + ": Not enough parameters\r\n")
 #define ERR_ALREADYREGISTERED(client) ("462 " + client + " :You may not reregister\r\n")
 #define ERR_PASSWDMISMATCH(client) ("464 " + client + " :Password incorrect\r\n")
+#define ERR_CHANNELISFULL(client, channel) ("471 " + client + " " + channel + " :Cannot join channel (+l)\r\n")
+#define ERR_INVITEONLYCHAN(client, channel) ("473 " + client + " " + channel + " :Cannot join channel (+i)\r\n")
+#define ERR_BADCHANNELKEY(client, channel) ("475 " + client + " " + channel + " :Cannot join channel (+k)\r\n")
 #define ERR_BADCHANMASK(channel) ("476 " + channel + " :Bad channel mask\r\n")
 #define ERR_CHANOPRIVSNEEDED(client, channel) ("482 " + client + " " + channel + " :You're not channel operator\r\n")
 

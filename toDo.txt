@@ -1,5 +1,0 @@
-Régler TOPIC avec Hexchat ou utiliser autre client
-MODE (O + L)
-Moduler JOIN selon MODE
-
-getter, setter, sendModes()

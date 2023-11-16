@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <csignal>
+#include <cstdlib>
 #include <map>
 #include <cstring>
 #include <sys/socket.h>
@@ -66,6 +67,12 @@ class Server
 		void		part(Client *client, std::vector<std::string> args);
 		void		privmsg(Client *client, std::vector<std::string> args);
 		void		notice(Client *client, std::vector<std::string> args);
+		void		partAll(Client *client);
+		void		kick(Client *client, std::vector<std::string> args);
+		void		invite(Client *client, std::vector<std::string> args);
+		void		mode(Client *client, std::vector<std::string> args);
+		void		sendModes(Client *client, Channel *channel);
+		void		changeModes(Client *client, Channel *channel, std::vector<std::string> args);
 
 		// Getters and Setters
 		
