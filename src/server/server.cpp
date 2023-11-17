@@ -38,6 +38,7 @@ int	Server::serverLoop()
 				handlePollout(clients[polls[i].fd]);
 		}
 	}
+	deleteAll();
 	return (SUCCESS);
 }
 
@@ -51,12 +52,14 @@ void	Server::handlePollin(Client *client)
 	if (readCount <= -1)
 	{
 		std::cerr << "[SERVER]: recv() FAILED" << std::endl;
+		partAll(client);
 		deleteClient(client);
 		return ;
 	}
 	else if (readCount == 0)
 	{
 		std::cout << "[SERVER]: A CLIENT JUST DISCONNECTED\n";
+		partAll(client);
 		deleteClient(client);
 		return ;
 	}

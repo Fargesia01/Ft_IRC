@@ -12,9 +12,14 @@ void	Server::join(Client *client, std::vector<std::string> args)
 		client->setSendBuffer(ERR_NEEDMOREPARAMS(client->getNickname(), "JOIN"));
 		return ;
 	}
-	else if(!validName(args[0]))
+	else if(!validName(args[0]) ||args[0][0] != '#')
 	{
 		client->setSendBuffer(ERR_BADCHANMASK(args[0]));
+		return ;
+	}
+	if (args[0][0] == '0')
+	{
+		partAll(client);
 		return ;
 	}
 	if (channels.find(args[0]) == channels.end())

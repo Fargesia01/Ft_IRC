@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <csignal>
+#include <unistd.h>
 #include <cstdlib>
 #include <map>
 #include <cstring>
@@ -54,6 +55,10 @@ class Server
 		void		handlePollin(Client *client);
 		void		handlePollout(Client *client);
 		void		execute(Client *client);
+		
+		// Utils
+		
+		void	deleteAll();
 
 		// Commands
 

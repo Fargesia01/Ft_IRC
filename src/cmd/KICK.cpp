@@ -2,7 +2,7 @@
 
 void	Server::kick(Client *client, std::vector<std::string> args)
 {
-	if ((int)args.size() < 2 || args[0].empty() || args[1].empty())
+	if ((int)args.size() < 2 || args[0].empty() || args[1].empty() || args[2].size() == 1)
 	{
 		client->setSendBuffer(ERR_NEEDMOREPARAMS(client->getNickname(), "KICK"));
 		return ;
@@ -28,7 +28,10 @@ void	Server::kick(Client *client, std::vector<std::string> args)
 		client->setSendBuffer(ERR_USERNOTINCHANNEL(client->getNickname(), args[0], args[1]));
 		return ;
 	}
-	channel->sendToAll(client->getNickname() + " KICK " + args[1] + " of " + args[0] + "\r\n");
+	std::string reason;
+	for (int i = 2; i < (int)args.size(); i++)
+		reason += args[i] + " ";
+	channel->sendToAll(RPL_KICK(user_id(client->getNickname(), client->getUsername()), channel->getName(), args[1], reason));
 	channel->rmClient(getClient(args[1]));
 	channel->rmOps(getClient(args[1]));
 }
