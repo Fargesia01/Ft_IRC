@@ -45,5 +45,6 @@
 # define RPL_JOIN(user_id, channel) (user_id + " JOIN :" +  channel + "\r\n")
 # define RPL_PART(user_id, channel, reason) (user_id + " PART " + channel + " " + (reason.empty() ? "." : reason ) + "\r\n")
 # define RPL_NOTICE(nick, username, target, message) (":" + nick + "!" + username + "@localhost NOTICE " + target + " " + message + "\r\n")
+# define RPL_KICK(user_id, channel, target, reason) (user_id + " KICK " + channel + " " + target + " " + reason + "\r\n")
 
 #endif
