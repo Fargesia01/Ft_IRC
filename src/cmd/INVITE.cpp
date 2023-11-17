@@ -30,5 +30,7 @@ void	Server::invite(Client *client, std::vector<std::string> args)
 	}
 	channel->addInvited(getClient(args[0]));
 	client->setSendBuffer(RPL_INVITING(client->getNickname(), args[1], args[0]));
+	if (getClient(args[0]) == NULL)
+		return ;
 	getClient(args[0])->setSendBuffer(client->getNickname() + " INVITE " + args[0] + " " + args[1] + "\r\n");
 }

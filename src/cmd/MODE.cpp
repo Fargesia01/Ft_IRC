@@ -49,6 +49,7 @@ void	Server::sendModes(Client *client, Channel *channel)
 void	Server::changeModes(Client *client, Channel *channel, std::vector<std::string> args)
 {
 	bool	add = true;
+	std::string	mode;
 	int	count = 2;
 
 	for (int i = 0; i < (int)args[1].size(); i++)
@@ -57,17 +58,19 @@ void	Server::changeModes(Client *client, Channel *channel, std::vector<std::stri
 		{
 			case '+':
 				add = true;
+				mode += '+';
 				break;
 			case '-':
 				add = false;
+				mode += '-';
 				break;
 			case 'i':
 				channel->setMode('i', add);
-				channel->sendToAll(MODEMSG(user_id(client->getNickname(), client->getUsername()), channel->getName(), "i"));
+				channel->sendToAll(MODEMSG(user_id(client->getNickname(), client->getUsername()), channel->getName(), mode + "i"));
 				break;
 			case 't':
 				channel->setMode('t', add);
-				channel->sendToAll(MODEMSG(user_id(client->getNickname(), client->getUsername()), channel->getName(), args[1]));
+				channel->sendToAll(MODEMSG(user_id(client->getNickname(), client->getUsername()), channel->getName(), mode + "t"));
 				break;
 			case 'k':
 				if (add == true && ((int)args.size() < (count + 1) || args[count].empty()))
@@ -78,7 +81,7 @@ void	Server::changeModes(Client *client, Channel *channel, std::vector<std::stri
 				channel->setMode('k', add);
 				if (add == true)
 					channel->setPassword(args[count++]);
-				channel->sendToAll(MODEMSG2(user_id(client->getNickname(), client->getUsername()), channel->getName(), args[1], args[2]));
+				channel->sendToAll(MODEMSG2(user_id(client->getNickname(), client->getUsername()), channel->getName(), mode + "k", args[2]));
 				break;
 			case 'o':
 				if ((int)args.size() < (count + 1) || args[count].empty())
@@ -95,6 +98,7 @@ void	Server::changeModes(Client *client, Channel *channel, std::vector<std::stri
 					channel->addOps(getClient(args[count++]));
 				else
 					channel->rmOps(getClient(args[count++]));
+				channel->sendToAll(MODEMSG2(user_id(client->getNickname(), client->getUsername()), channel->getName(), mode + "o", args[2]));
 				break;
 			case 'l':
 				if (add == true && ((int)args.size() < (count + 1) || args[count].empty()))
@@ -113,6 +117,7 @@ void	Server::changeModes(Client *client, Channel *channel, std::vector<std::stri
 					channel->setUserLimit(new_limit);
 				}
 				channel->setMode('l', add);
+				channel->sendToAll(MODEMSG2(user_id(client->getNickname(), client->getUsername()), channel->getName(), mode + "l", args[2]));
 				break;
 			default:
 				break;
