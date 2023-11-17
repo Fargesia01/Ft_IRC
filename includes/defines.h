@@ -9,7 +9,7 @@
 #define RPL_WELCOME(client) ("001 " + client + " :Welcome to the Internet Relay Network " + client + "\r\n")
 #define RPL_YOURHOST(client) ("002 " + client + " :Your host is ft_irc, running version 1.0\r\n")
 #define RPL_CREATED(client, datetime) ("003 " + client + " :This server was created " + datetime + "\r\n")
-#define RPL_MYINFO(client, user_modes, chan_modes, chan_param_modes) ("004 " + client + " :ft_irc 1.0 " + user_modes + "\n" + chan_modes + " " + chan_param_modes + "\r\n")
+#define RPL_MYINFO(client, user_modes, chan_modes) ("004 " + client + " :ft_irc 1.0 " + user_modes + "\n" + chan_modes + "\r\n")
 #define RPL_LUSERCLIENT(client, nbrUser) ("251 " + client + ": There are " + nbrUser + " users and 0 invisible on 1 servers\r\n") 
 #define RPL_LUSEROP(client, nbrOps) ("252 " + client + " " + nbrOps + ": operator(s) online\r\n")
 #define RPL_LUSERCHANNELS(client, nbrChan) ("254 " + client + " " + nbrChan + ": channels formed\r\n")
@@ -46,5 +46,7 @@
 # define RPL_PART(user_id, channel, reason) (user_id + " PART " + channel + " " + (reason.empty() ? "." : reason ) + "\r\n")
 # define RPL_NOTICE(nick, username, target, message) (":" + nick + "!" + username + "@localhost NOTICE " + target + " " + message + "\r\n")
 # define RPL_KICK(user_id, channel, target, reason) (user_id + " KICK " + channel + " " + target + " " + reason + "\r\n")
+# define MODEMSG(user_id, channel, mode) (user_id + " MODE " + channel + " " + mode + "\r\n")
+# define MODEMSG2(user_id, channel, mode, args) (user_id + " MODE " + channel + " " + mode + " :" + args + "\r\n")
 
 #endif

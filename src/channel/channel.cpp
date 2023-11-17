@@ -5,6 +5,10 @@
 Channel::Channel(std::string name): name(name)
 {
 	password = "";
+	i_only = false;
+	op_topic = false;
+	pass_req = false;
+	user_limit = false;
 }
 
 Channel::~Channel() {};
