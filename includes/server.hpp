@@ -55,6 +55,10 @@ class Server
 		void		handlePollin(Client *client);
 		void		handlePollout(Client *client);
 		void		execute(Client *client);
+		
+		// Utils
+		
+		void	deleteAll();
 
 		// Commands
 
