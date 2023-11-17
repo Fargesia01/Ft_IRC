@@ -22,6 +22,7 @@ void    Server::privmsg(Client *client, std::vector<std::string> args)
     }
     if (args[0][0] == '#')
     {
+		std::string name = args[0].substr(1);
         Channel *channel = getChannel(args[0]);
         if (!channel)
         {

@@ -28,7 +28,7 @@ void	Server::kick(Client *client, std::vector<std::string> args)
 		client->setSendBuffer(ERR_USERNOTINCHANNEL(client->getNickname(), args[0], args[1]));
 		return ;
 	}
-	channel->sendToAll(client->getNickname() + " KICK " + args[1] + " of " + args[0] + "\r\n");
+	channel->sendToAll(user_id(client->getNickname(), client->getUsername()) + " KICK " + args[1] + " of " + args[0] + "\r\n");
 	channel->rmClient(getClient(args[1]));
 	channel->rmOps(getClient(args[1]));
 }

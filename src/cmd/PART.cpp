@@ -24,5 +24,9 @@ void	Server::part(Client *client, std::vector<std::string> args)
 	channel->rmClient(client);
 	channel->rmOps(client);
 	if (channel->getClients().size() == 0)
+	{
+		std::cout << "Erasing channel" << std::endl;
+		delete(channel);
 		channels.erase(channels.find(channel->getName()));
+	}
 }

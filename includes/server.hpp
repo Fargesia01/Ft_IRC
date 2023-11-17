@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <csignal>
+#include <unistd.h>
 #include <cstdlib>
 #include <map>
 #include <cstring>

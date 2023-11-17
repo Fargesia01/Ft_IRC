@@ -18,8 +18,8 @@
 #define RPL_NOTOPIC(client, channel) ("331 " + client + " " + channel + " :No topic is set\r\n")
 #define RPL_TOPIC(client, channel, topic) ("332 " + client + " " + channel + " :" + topic + "\r\n")
 #define RPL_INVITING(client, channel, nick) ("341 " + client + " " + nick + " " + channel + "\r\n")
-#define RPL_NAMREPLY(client, channel, target) ("353 " + client + " = " + channel + " " + target + "\r\n")
-#define RPL_ENDOFNAMES(client, channel) ("366 " + client + " " + channel + " :End of /NAMES list\r\n")
+#define RPL_NAMREPLY(client, channel, target) (":localhost 353 " + client + " = " + channel + " " + target + "\r\n")
+#define RPL_ENDOFNAMES(client, channel) (":localhost 366 " + client + " " + channel + " :End of /NAMES list\r\n")
 #define ERR_NOSUCHNICK(client, target) ("401 " + client + " " + target + " :No such nick/channel\r\n")
 #define ERR_NOSUCHCHANNEL(client, channel) ("403 " + client + " " + channel + " :No such channel\r\n")
 #define ERR_NONICKNAMEGIVEN(client) ("431 " + client + " :No nickname given\r\n")
@@ -38,7 +38,7 @@
 #define ERR_BADCHANMASK(channel) ("476 " + channel + " :Bad channel mask\r\n")
 #define ERR_CHANOPRIVSNEEDED(client, channel) ("482 " + client + " " + channel + " :You're not channel operator\r\n")
 
-#define VALID_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[]{}\\|"
+#define VALID_CHARS "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[]{}\\|#"
 
 # define user_id(nickname, username) (":" + nickname + "!" + username + "@localhost")
 # define RPL_PRIVMSG(nick, username, target, message) (":" + nick + "!" + username + "@localhost PRIVMSG " + target + " " + message + "\r\n")
