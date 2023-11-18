@@ -49,7 +49,7 @@ void	Server::sendModes(Client *client, Channel *channel)
 void	Server::changeModes(Client *client, Channel *channel, std::vector<std::string> args)
 {
 	bool	add = true;
-	std::string	mode;
+	std::string	mode = "+";
 	int	count = 2;
 
 	for (int i = 0; i < (int)args[1].size(); i++)
@@ -58,11 +58,11 @@ void	Server::changeModes(Client *client, Channel *channel, std::vector<std::stri
 		{
 			case '+':
 				add = true;
-				mode += '+';
+				mode = '+';
 				break;
 			case '-':
 				add = false;
-				mode += '-';
+				mode = '-';
 				break;
 			case 'i':
 				channel->setMode('i', add);
