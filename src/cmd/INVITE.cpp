@@ -23,6 +23,11 @@ void	Server::invite(Client *client, std::vector<std::string> args)
 		client->setSendBuffer(ERR_USERONCHANNEL(client->getNickname(), args[1], args[0]));
 		return ;
 	}
+	if (getClient(args[0]) == NULL)
+	{
+		client->setSendBuffer(ERR_NOSUCHNICK(client->getNickname(), args[0]));
+		return ;
+	}
 	if (channel->getMode('i') == true && !channel->isOps(client))
 	{
 		client->setSendBuffer(ERR_CHANOPRIVSNEEDED(client->getNickname(), args[0]));
@@ -30,7 +35,5 @@ void	Server::invite(Client *client, std::vector<std::string> args)
 	}
 	channel->addInvited(getClient(args[0]));
 	client->setSendBuffer(RPL_INVITING(client->getNickname(), args[1], args[0]));
-	if (getClient(args[0]) == NULL)
-		return ;
 	getClient(args[0])->setSendBuffer(client->getNickname() + " INVITE " + args[0] + " " + args[1] + "\r\n");
 }
