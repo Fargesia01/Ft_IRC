@@ -30,7 +30,7 @@ void	Server::invite(Client *client, std::vector<std::string> args)
 	}
 	if (channel->getMode('i') == true && !channel->isOps(client))
 	{
-		client->setSendBuffer(ERR_CHANOPRIVSNEEDED(client->getNickname(), args[0]));
+		client->setSendBuffer(ERR_CHANOPRIVSNEEDED(client->getNickname(), args[1]));
 		return ;
 	}
 	channel->addInvited(getClient(args[0]));
