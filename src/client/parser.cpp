@@ -54,7 +54,7 @@ void	Client::parse()
 				continue ;
 			}
 			if (last_arg)
-				args.back() += tmp[i];
+				args.back() += " " + tmp[i];
 			else
 				args.push_back(tmp[i]);
 		}

@@ -6,14 +6,14 @@
 	THE ARGUMENTS USUALLY ARE THE CLIENT NICKNAME AND THE COMMAND
 */
 
-#define RPL_WELCOME(client) ("001 " + client + " :Welcome to the Internet Relay Network " + client + "\r\n")
-#define RPL_YOURHOST(client) ("002 " + client + " :Your host is ft_irc, running version 1.0\r\n")
-#define RPL_CREATED(client, datetime) ("003 " + client + " :This server was created " + datetime + "\r\n")
-#define RPL_MYINFO(client, user_modes, chan_modes) ("004 " + client + " :ft_irc 1.0 " + user_modes + "\n" + chan_modes + "\r\n")
-#define RPL_LUSERCLIENT(client, nbrUser) ("251 " + client + ": There are " + nbrUser + " users and 0 invisible on 1 servers\r\n") 
-#define RPL_LUSEROP(client, nbrOps) ("252 " + client + " " + nbrOps + ": operator(s) online\r\n")
-#define RPL_LUSERCHANNELS(client, nbrChan) ("254 " + client + " " + nbrChan + ": channels formed\r\n")
-#define RPL_LUSERME(client, nbrClient) ("255 " + client + " : I have " + nbrClient + " clients and 1 servers\r\n")
+#define RPL_WELCOME(client) (":localhost 001 " + client + " :Welcome to the Internet Relay Network " + client + "\r\n")
+#define RPL_YOURHOST(client) (":localhost 002 " + client + " :Your host is ft_irc, running version 1.0\r\n")
+#define RPL_CREATED(client, datetime) (":localhost 003 " + client + " :This server was created " + datetime + "\r\n")
+#define RPL_MYINFO(client, user_modes, chan_modes) (":localhost 004 " + client + " :ft_irc 1.0 " + user_modes + "\n" + chan_modes + "\r\n")
+#define RPL_LUSERCLIENT(client, nbrUser) (":localhost 251 " + client + ": There are " + nbrUser + " users and 0 invisible on 1 servers\r\n") 
+#define RPL_LUSEROP(client, nbrOps) (":localhost 252 " + client + " " + nbrOps + ": operator(s) online\r\n")
+#define RPL_LUSERCHANNELS(client, nbrChan) (":localhost 254 " + client + " " + nbrChan + ": channels formed\r\n")
+#define RPL_LUSERME(client, nbrClient) (":localhost 255 " + client + " : I have " + nbrClient + " clients and 1 servers\r\n")
 #define RPL_CHANNELMODEIS(client, channel, mode) (":localhost 324 " + client + " " + channel + " " + mode + "\r\n")
 #define RPL_NOTOPIC(client, channel) (":localhost 331 " + client + " " + channel + " :No topic is set\r\n")
 #define RPL_TOPIC(client, channel, topic) (":localhost 332 " + client + " " + channel + " :" + topic + "\r\n")
