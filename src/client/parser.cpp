@@ -20,10 +20,14 @@ We then split the message for it to be correctly handled:
 
 void	Client::parse()
 {
-	std::string	actual;
-	t_cmd		cmd;
+	std::string				actual;
+	t_cmd					cmd;
+
 	while (!readBuffer.empty())
 	{
+		std::vector<std::string> args;
+		bool					last_arg = false;
+
 		if (readBuffer.empty())
 			return ;
 		if (!msgChecks(readBuffer))
@@ -31,8 +35,6 @@ void	Client::parse()
 
 		actual = readBuffer.substr(0, readBuffer.find("\r\n"));
 		readBuffer.erase(0, readBuffer.find("\r\n") + 2);
-		//readBuffer = readBuffer.substr(0, readBuffer.find("\n"));
-		//readBuffer.erase(0, readBuffer.find("\n"));
 
 		std::vector<std::string> tmp = split(actual, ' ');
 
@@ -42,9 +44,24 @@ void	Client::parse()
 				tmp.erase(tmp.begin());
 		}
 
-		cmd.cmd = tmp[0];
-		tmp.erase(tmp.begin());
-		cmd.args = tmp;
+		for (int i = 0; i < (int)tmp.size(); i++)
+		{
+			if (tmp[i][0] == ':')
+			{
+				last_arg = true;
+				tmp[i].erase(0, 1);
+				args.push_back(tmp[i]);
+				continue ;
+			}
+			if (last_arg)
+				args.back() += tmp[i];
+			else
+				args.push_back(tmp[i]);
+		}
+
+		cmd.cmd = args[0];
+		args.erase(args.begin());
+		cmd.args = args;
 		cmds.push_back(cmd);
 		nbr_cmds++;
 	}

@@ -19,12 +19,15 @@ void	Server::nick(Client *client, std::vector<std::string> args)
 		std::cout << "Client not authorized" << std::endl;
 	else
 	{
-		client->setNickname(args[0]);
-		if (!client->getRealname().empty())
+		if (!client->getRealname().empty() && client->getNickname().empty())
 		{
+			client->setNickname(args[0]);
 			client->setRegistered(true);
 			welcomeClient(client);
+			return ;
 		}
+		client->setSendBuffer(user_id(client->getNickname(), client->getUsername()) + " NICK :" + args[0] + "\r\n");
+		client->setNickname(args[0]);
 		std::cout << "Nick registered" << std::endl;
 	}
 }

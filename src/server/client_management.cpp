@@ -40,8 +40,8 @@ void	Server::welcomeClient(Client *client) const
 	client->setSendBuffer(RPL_YOURHOST(client->getNickname()));
 	client->setSendBuffer(RPL_CREATED(client->getNickname(), datetime));
 	client->setSendBuffer(RPL_MYINFO(client->getNickname(), "users: operator_user, basic_user", "channel modes: invite only, password required"));
-	// client->setSendBuffer(RPL_LUSERCLIENT(client->getNickname(), intToString((int)clients.size())));
-	// client->setSendBuffer(RPL_LUSEROP(client->getNickname(), "0"));
-	// client->setSendBuffer(RPL_LUSERCHANNELS(client->getNickname(), "0"));
-	// client->setSendBuffer(RPL_LUSERME(client->getNickname(), intToString((int)clients.size())));
+	client->setSendBuffer(RPL_LUSERCLIENT(client->getNickname(), intToString((int)clients.size())));
+	client->setSendBuffer(RPL_LUSEROP(client->getNickname(), "0"));
+	client->setSendBuffer(RPL_LUSERCHANNELS(client->getNickname(), "0"));
+	client->setSendBuffer(RPL_LUSERME(client->getNickname(), intToString((int)clients.size())));
 }
