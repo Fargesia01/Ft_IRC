@@ -37,15 +37,17 @@ void	Server::partAll(Client *client)
 	{
 		if (it->second->isMember(client))
 		{
+			it->second->sendToAll(user_id(client->getNickname(), client->getUsername()) + " PART " + it->first + " :Leaving\r\n");
 			it->second->rmClient(client);
 			if (it->second->getClients().size() == 0)
 			{
+				std::cout << "Erasing channel" << std::endl;
 				delete it->second;
 				channels.erase(it++);
 			}
 			else
 			{
-				it->second->sendToAll(user_id(client->getNickname(), client->getUsername()) + " PART " + it->first + " :Leaving");
+				//it->second->sendToAll(user_id(client->getNickname(), client->getUsername()) + " PART " + it->first + " :Leaving\r\n");
 				++it;
 			}
 		}
