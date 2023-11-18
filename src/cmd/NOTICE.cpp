@@ -16,12 +16,12 @@ void    Server::notice(Client *client, std::vector<std::string> args)
     }
     if (args[0][0] == '#')
     {
-        Channel *channel = getChannel(args[0]);
-        if (!channel)
+		if (channels.find(args[0]) == channels.end())
         {
-            client->setSendBuffer(ERR_NOSUCHCHANNEL(client->getNickname(), channel->getName()));
+            client->setSendBuffer(ERR_NOSUCHCHANNEL(client->getNickname(), args[0]));
             return;
         }
+        Channel *channel = getChannel(args[0]);
         channel->clientToAll(RPL_NOTICE(client->getNickname(), client->getUsername(), channel->getName(), message), client->getSocket());
         return;
     }

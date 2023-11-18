@@ -22,13 +22,12 @@ void    Server::privmsg(Client *client, std::vector<std::string> args)
     }
     if (args[0][0] == '#')
     {
-		std::string name = args[0].substr(1);
-        Channel *channel = getChannel(args[0]);
-        if (!channel)
+		if (channels.find(args[0]) == channels.end())
         {
-            client->setSendBuffer(ERR_NOSUCHCHANNEL(client->getNickname(), channel->getName()));
+            client->setSendBuffer(ERR_NOSUCHCHANNEL(client->getNickname(), args[0]));
             return;
         }
+        Channel *channel = getChannel(args[0]);
         channel->clientToAll(RPL_PRIVMSG(client->getNickname(), client->getUsername(), channel->getName(), message), client->getSocket());
         return;
     }
