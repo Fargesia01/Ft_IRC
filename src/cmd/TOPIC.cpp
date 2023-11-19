@@ -30,7 +30,7 @@ void	Server::topic(Client *client, std::vector<std::string> args)
 	}
 	else
 	{
-		if (!channel->isOps(client))
+		if (channel->getMode('t') && !channel->isOps(client))
 			client->setSendBuffer(ERR_CHANOPRIVSNEEDED(client->getNickname(), args[0]));
 		else
 		{

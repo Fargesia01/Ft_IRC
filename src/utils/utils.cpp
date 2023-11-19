@@ -8,7 +8,8 @@ std::vector<std::string> split(const std::string &str, const char &sep)
 	
 	while (pos != std::string::npos && !cpy.empty())
 	{
-		tab.push_back(cpy.substr(0, pos));
+		if ((int)pos != 0 )
+			tab.push_back(cpy.substr(0, pos));
 		cpy.erase(0, pos + 1);
 		pos = cpy.find(sep);
 	

@@ -11,7 +11,7 @@ void	Server::nick(Client *client, std::vector<std::string> args)
 {
 	if (args.empty() || args[0].empty())
 		client->setSendBuffer(ERR_NONICKNAMEGIVEN(client->getNickname()));
-	else if (!validName(args[0]))
+	else if (!validName(args[0]) || args[0][0] == '#')
 		client->setSendBuffer(ERR_ERRONEUSNICKNAME(client->getNickname(), args[0]));
 	else if (this->getClient(args[0]))
 		client->setSendBuffer(ERR_NICKNAMEINUSE(client->getNickname(), args[0]));
